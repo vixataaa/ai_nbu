@@ -1,0 +1,41 @@
+html
+  head
+    title
+      | AI Project
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
+  body
+    .container
+      h1.text-center
+        | Extract topics, social tags and industry tags from text
+      form(method='POST')
+        if context && context.text
+          textarea.form-control(type='text' name='text' placeholder='Enter text...' style='height: 70%')
+            | #{context.text}
+        else
+          textarea.form-control(type='text' name='text' placeholder='Enter text...' style='height: 70%')
+        button(type='submit')
+          | Submit
+
+      if context && context.textInfo
+        h3
+          | Topics
+        ul
+          each topic in context.textInfo.topics
+            li
+              | #{topic.name}
+        h3
+          | Social tags
+        ul
+          each socialTag in context.textInfo.socialTags
+            li
+              | #{socialTag.name}
+        h3
+          | Industry tags
+        ul
+          each industryTag in context.textInfo.industryTags
+            li
+              | #{industryTag.name}
+
+      footer.fixed-bottom.text-right
+        a(href='http://www.opencalais.com')
+          img(src='/img/logo.png')
